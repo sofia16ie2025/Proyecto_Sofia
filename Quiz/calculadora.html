@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de materiales</title>
+<link href="css/stilos.css" rel="stylesheet">
+<style>
+  
+</style>
+</head>
+<body>
+
+<!-- BIENVENIDO -->
+<div class="screen auth-screen activa" id="bienvenida">
+  <div class="auth-inner" style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+    <div class="avatar" style="margin:0;"><svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7v1H4v-1z"/></svg></div>
+    <h1 style="margin:0;">Welcome!</h1>
+    <p class="subtitulo" style="margin: -12px 0 0 0;">Calculadora de materiales</p>
+    <button style="margin:0;width:220px;" onclick="mostrar('login')">LOGIN</button>
+    <button style="margin:0;width:220px;" onclick="mostrar('registro')">CREATE AN ACCOUNT</button>
+    <h3 style="margin:0;">Thanks!</h3>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div class="screen auth-screen" id="login">
+  <div class="auth-inner">
+    <div class="avatar"><svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7v1H4v-1z"/></svg></div>
+    <h3>Registro de usuario:</h3>
+    <form onsubmit="event.preventDefault(); mostrar('menuApp');">
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <label class="check"><input type="checkbox" required> Acepto términos y condiciones</label>
+      <a class="link" onclick="mostrar('recuperar')">¿Olvidaste tu contraseña?</a>
+      <button class="morado" type="submit">Login</button>
+    </form>
+    <a class="link" onclick="mostrar('registro')">¿No tienes cuenta? Regístrate</a>
+  </div>
+</div>
+
+<!-- RECUPERAR CONTRASEÑA -->
+<div class="screen auth-screen" id="recuperar">
+  <div class="auth-inner">
+    <div class="avatar"><svg viewBox="0 0 24 24" fill="white" width="46" height="46"><path d="M6 10V8a6 6 0 1112 0v2h1a1 1 0 011 1v9a1 1 0 01-1 1H5a1 1 0 01-1-1v-9a1 1 0 011-1h1zm2 0h8V8a4 4 0 00-8 0v2z"/></svg></div>
+    <h3>Recuperar contraseña</h3>
+    <p class="subtitulo">Ingresa tu correo y te enviaremos instrucciones.</p>
+    <form onsubmit="event.preventDefault(); document.getElementById('msgRecuperar').classList.remove('oculto');">
+      <input type="email" placeholder="tucorreo@ejemplo.com" required>
+      <button class="morado" type="submit">Enviar instrucciones</button>
+    </form>
+    <p class="resultado oculto" id="msgRecuperar">Revisa tu correo, te enviamos un enlace para restablecer tu contraseña.</p>
+    <a class="link" onclick="mostrar('login')">← Volver a iniciar sesión</a>
+  </div>
+</div>
+
+<!-- REGISTRO -->
+<div class="screen auth-screen" id="registro">
+  <div class="auth-inner">
+    <div class="avatar"><svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7v1H4v-1z"/></svg></div>
+    <h2>Registrate!</h2>
+    <form onsubmit="event.preventDefault(); mostrar('menuApp');">
+      <input type="text" placeholder="User Name" required>
+      <input type="email" placeholder="E-mail" required>
+      <input type="password" placeholder="Password" required>
+      <input type="password" placeholder="Repeat password" required>
+      <button class="oscuro" type="submit">Create account</button>
+    </form>
+    <a class="link" onclick="mostrar('login')">← Volver</a>
+  </div>
+</div>
+
+<!-- APP: MENU + CALCULADORAS -->
+<div class="screen" id="menuApp">
+  <nav>
+    <button id="usuario" onclick="toggleMenu()"><svg viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7v1H4v-1z"/></svg></button>
+    <div id="dropdown">
+      <a onclick="mostrar('bienvenida')">Cerrar sesión</a>
+      <a onclick="mostrar('login')">Cambiar de cuenta</a>
+    </div>
+  </nav>
+
+  <div id="menu">
+    <div class="titulo-pill">Calculadora de materiales</div>
+    <div class="menu-img">🧮</div>
+    <button onclick="mostrar('cMuro')">🧱 Calcular muro de ladrillo</button>
+    <button onclick="mostrar('cColumna')">🏛️ Calcular columna de hormigón</button>
+    <button onclick="mostrar('cViga')">📏 Calcular viga de hormigón</button>
+    <button onclick="mostrar('cContrapiso')">⬛ Calcular contrapiso</button>
+    <button onclick="mostrar('cTecho')">🏠 Calcular techo</button>
+    <button onclick="mostrar('cPiso')">◻️ Calcular piso</button>
+    <button onclick="mostrar('cPintura')">🎨 Calcular pintura</button>
+    <button onclick="mostrar('salir')">🚪 Salir</button>
+  </div>
+</div>
+
+<!-- MURO -->
+<div class="screen calculadora" id="cMuro">
+  <a class="link" onclick="mostrar('menuApp')">← Menú</a>
+  <h2>Muro de ladrillo</h2>
+  <label>Espesor del muro:</label>
+  <select id="muroEspesor">
+    <option value="20">20 cm</option>
+    <option value="30">30 cm</option>
+  </select>
+  <label>Largo (m):</label>
+  <input type="number" id="muroLargo" placeholder="Ej: 5">
+  <label>Alto (m):</label>
+  <input type="number" id="muroAlto" placeholder="Ej: 2.5">
+  <button onclick="calcularMuro()">Calcular</button>
+  <div id="resMuro"></div>
+</div>
+
+<!-- COLUMNA -->
+<div class="screen calculadora" id="cColumna">
+  <a class="link" onclick="mostrar('menuApp')">← Menú</a>
+  <h2>Columna de hormigón</h2>
+  <label>Largo (m):</label>
+  <input type="number" id="colLargo" placeholder="Ej: 3">
+  <button onclick="calcularColumna()">Calcular</button>
+  <div id="resColumna"></div>
+</div>
+
+<!-- VIGA -->
+<div class="screen calculadora" id="cViga">
+  <a class="link" onclick="mostrar('menuApp')">← Menú</a>
+  <h2>Viga de hormigón</h2>
+  <label>Largo (m):</label>
+  <input type="number" id="vigaLargo" placeholder="Ej: 5">
+  <button onclick="calcularViga()">Calcular</button>
+  <div id="resViga"></div>
+</div>
+
+<!-- CONTRAPISO -->
+<div class="screen calculadora" id="cContrapiso">
+  <a class="link" onclick="mostrar('menuApp')">← Menú</a>
+  <h2>Contrapiso</h2>
+  <label>Espesor (m):</label>
+  <input type="number" id="cpEspesor" placeholder="Ej: 0.1">
+  <label>Largo (m):</label>
+  <input type="number" id="cpLargo" placeholder="Ej: 3">
+  <label>Ancho (m):</label>
+  <input type="number" id="cpAncho" placeholder="Ej: 3">
+  <button onclick="calcularContrapiso()">Calcular</button>
+  <div id="resContrapiso"></div>
+</div>
+
+<!-- TECHO -->
+<div class="screen calculadora" id="cTecho">
+  <a class="link" onclick="mostrar('menuApp')">← Menú</a>
+  <h2>Techo</h2>
+  <label>Espesor (m):</label>
+  <input type="number" id="techoEspesor" placeholder="Ej: 0.1">
+  <label>Largo (m):</label>
+  <input type="number" id="techoLargo" placeholder="Ej: 5">
+  <label>Alto (m):</label>
+  <input type="number" id="techoAlto" placeholder="Ej: 4">
+  <button onclick="calcularTecho()">Calcular</button>
+  <div id="resTecho"></div>
+</div>
+
+<!-- PISO -->
+<div class="screen calculadora" id="cPiso">
+  <a class="link" onclick="mostrar('menuApp')">← Menú</a>
+  <h2>Piso</h2>
+  <label>Ancho (m):</label>
+  <input type="number" id="pisoAncho" placeholder="Ej: 4">
+  <label>Alto (m):</label>
+  <input type="number" id="pisoAlto" placeholder="Ej: 3">
+  <button onclick="calcularPiso()">Calcular</button>
+  <div id="resPiso"></div>
+</div>
+
+<!-- PINTURA -->
+<div class="screen calculadora" id="cPintura">
+  <a class="link" onclick="mostrar('menuApp')">← Menú</a>
+  <h2>Pintura</h2>
+  <label>Superficie (m²):</label>
+  <input type="number" id="pinturaSup" placeholder="Ej: 12.5">
+  <button onclick="calcularPintura()">Calcular</button>
+  <div id="resPintura"></div>
+</div>
+
+<!-- SALIR -->
+<div class="screen auth-screen" id="salir">
+  <div class="auth-inner">
+    <h2>Calculadora de materiales</h2>
+    <p>E-mail: calculadora-us@gmail.com</p>
+    <p>Teléfono: +3 608 075 2395</p>
+    <img src="img/plano.avif" alt="Plano de construcción" style="display:block;width:100%;max-width:270px;margin:0 auto 20px;border-radius:12px;">
+    <button onclick="mostrar('bienvenida')">Go Out</button>
+    <h2>Thanks You!</h2>
+    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">
+      <a href="https://www.facebook.com" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#1877F2;display:flex;align-items:center;justify-content:center;text-decoration:none;overflow:hidden;">
+        <img src="img/facebook.svg" width="18" height="18" alt="White Facebook logo shaped as a lowercase f within a blue circular social media button">
+      </a>
+      <a href="https://www.instagram.com" target="_blank" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);display:flex;align-items:center;justify-content:center;text-decoration:none;overflow:hidden;">
+        <img src="img/instagram.web.svg" width="18" height="18" alt="Instagram logo in white, centered within a circular gradient background transitioning from yellow to pink and purple">
+      </a>
+      <a href="https://wa.me/34608075239" target="_blank" style="width:34px;height:34px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;overflow:hidden;">
+        <img src="img/WhatsApp.svg.webp" width="18" height="18" alt="WhatsApp">
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Muestra u oculta el menú desplegable de la hamburguesa
+function toggleMenu(){
+  document.getElementById('dropdown').classList.toggle('activa');
+}
+
+// Cambia la pantalla que se muestra
+function mostrar(id){
+  var pantallas = document.getElementsByClassName('screen');
+  for(var i=0; i<pantallas.length; i++){
+    pantallas[i].classList.remove('activa');
+  }
+  document.getElementById(id).classList.add('activa');
+  document.getElementById('dropdown').classList.remove('activa');
+}
+
+// MURO DE LADRILLO
+function calcularMuro(){
+  var esp = parseInt(document.getElementById('muroEspesor').value);
+  var largo = parseFloat(document.getElementById('muroLargo').value);
+  var alto = parseFloat(document.getElementById('muroAlto').value);
+  if(!(largo>0) || !(alto>0)){ alert('Ingresa valores válidos'); return; }
+  var factor = esp==30 ? 1.5 : 1;
+  var superficie = largo*alto;
+  var cemento = superficie*10.9*factor;
+  var arena = superficie*0.09*factor;
+  var ladrillo = Math.round(superficie*90*factor);
+  document.getElementById('resMuro').innerHTML =
+    '<div class="resultado">'+superficie.toFixed(2)+' m²<span>Superficie</span></div>'+
+    '<div class="resultado">'+cemento.toFixed(1)+' Kg<span>Cemento</span></div>'+
+    '<div class="resultado">'+arena.toFixed(2)+' m³<span>Arena</span></div>'+
+    '<div class="resultado">'+ladrillo+'<span>Ladrillo</span></div>';
+}
+
+// COLUMNA
+function calcularColumna(){
+  var largo = parseFloat(document.getElementById('colLargo').value);
+  if(!(largo>0)){ alert('Ingresa un valor válido'); return; }
+  document.getElementById('resColumna').innerHTML =
+    '<div class="resultado">'+(largo*0.016).toFixed(3)+' m³<span>Piedra</span></div>'+
+    '<div class="resultado">'+(largo*7.5).toFixed(1)+' Kg<span>Cemento</span></div>'+
+    '<div class="resultado">'+(largo*0.016).toFixed(3)+' m³<span>Arena</span></div>'+
+    '<div class="resultado">'+(largo*3.33).toFixed(1)+' m<span>Hierro de 10</span></div>'+
+    '<div class="resultado">'+(largo*3).toFixed(1)+' m<span>Hierro de 4</span></div>';
+}
+
+// VIGA
+function calcularViga(){
+  var largo = parseFloat(document.getElementById('vigaLargo').value);
+  if(!(largo>0)){ alert('Ingresa un valor válido'); return; }
+  document.getElementById('resViga').innerHTML =
+    '<div class="resultado">'+(largo*0.02).toFixed(2)+' m³<span>Piedra</span></div>'+
+    '<div class="resultado">'+(largo*9).toFixed(1)+' Kg<span>Cemento</span></div>'+
+    '<div class="resultado">'+(largo*0.06).toFixed(2)+' m³<span>Arena</span></div>'+
+    '<div class="resultado">'+(largo*4).toFixed(1)+' m<span>Hierro de 8</span></div>'+
+    '<div class="resultado">'+(largo*4).toFixed(1)+' m<span>Hierro de 4</span></div>';
+}
+
+// CONTRAPISO
+function calcularContrapiso(){
+  var esp = parseFloat(document.getElementById('cpEspesor').value);
+  var largo = parseFloat(document.getElementById('cpLargo').value);
+  var ancho = parseFloat(document.getElementById('cpAncho').value);
+  if(!(esp>0) || !(largo>0) || !(ancho>0)){ alert('Ingresa valores válidos'); return; }
+  var volumen = esp*largo*ancho;
+  document.getElementById('resContrapiso').innerHTML =
+    '<div class="resultado">'+volumen.toFixed(2)+' m³<span>Volumen</span></div>'+
+    '<div class="resultado">'+(volumen*105).toFixed(1)+' Kg<span>Cemento</span></div>'+
+    '<div class="resultado">'+(volumen*0.45).toFixed(2)+' m³<span>Arena</span></div>'+
+    '<div class="resultado">'+(volumen*1.5).toFixed(2)+' m³<span>Piedra</span></div>';
+}
+
+// TECHO
+function calcularTecho(){
+  var esp = parseFloat(document.getElementById('techoEspesor').value);
+  var largo = parseFloat(document.getElementById('techoLargo').value);
+  var alto = parseFloat(document.getElementById('techoAlto').value);
+  if(!(esp>0) || !(largo>0) || !(alto>0)){ alert('Ingresa valores válidos'); return; }
+  var superficie = largo*alto;
+  document.getElementById('resTecho').innerHTML =
+    '<div class="resultado">'+superficie.toFixed(2)+' m²<span>Superficie</span></div>'+
+    '<div class="resultado">'+(superficie*33).toFixed(0)+' Kg<span>Cemento</span></div>'+
+    '<div class="resultado">'+(superficie*7).toFixed(0)+' m<span>Hierro de 8</span></div>'+
+    '<div class="resultado">'+(superficie*4).toFixed(0)+' m<span>Hierro de 6</span></div>'+
+    '<div class="resultado">'+(superficie*0.072).toFixed(2)+' m³<span>Arena</span></div>'+
+    '<div class="resultado">'+(superficie*0.072).toFixed(2)+' m³<span>Piedra</span></div>';
+}
+
+// PISO
+function calcularPiso(){
+  var ancho = parseFloat(document.getElementById('pisoAncho').value);
+  var alto = parseFloat(document.getElementById('pisoAlto').value);
+  if(!(ancho>0) || !(alto>0)){ alert('Ingresa valores válidos'); return; }
+  var base = ancho*alto;
+  document.getElementById('resPiso').innerHTML =
+    '<div class="resultado">'+base.toFixed(2)+' m²<span>Superficie base</span></div>'+
+    '<div class="resultado">'+(base*1.1).toFixed(2)+' m²<span>Con 10% extra</span></div>';
+}
+
+// PINTURA
+function calcularPintura(){
+  var sup = parseFloat(document.getElementById('pinturaSup').value);
+  if(!(sup>0)){ alert('Ingresa un valor válido'); return; }
+  document.getElementById('resPintura').innerHTML =
+    '<div class="resultado">'+(sup/6).toFixed(2)+' L<span>Pintura necesaria</span></div>';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+ body{
+    margin:0;
+    font-family:'Nunito', sans-serif;
+    background:linear-gradient(135deg, #a879dc, #8b64c3 30%, #62468f 60%, #3a2a55);
+    color:#efe6f7;
+    min-height:100vh;
+  }
+  h1,h2,h3,button{ font-family:'Baloo 2', sans-serif; }
+
+  .screen{display:none; padding:40px 20px; text-align:center;}
+  .screen.activa{display:block;}
+  .screen.auth-screen.activa{
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; box-sizing:border-box;
+  }
+  #menuApp.screen{ padding:0; }
+  #menuApp #menu{ padding:30px 20px 40px; }
+
+  .avatar{
+    width:100px; height:100px; border-radius:50%;
+    background:#0d0d0d; margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .avatar svg{ width:50px; height:50px; }
+
+  input, select{
+    display:block;
+    margin:0 auto 14px;
+    padding:12px 16px;
+    width:260px;
+    max-width:80%;
+    border-radius:20px;
+    border:none;
+    text-align:center;
+    font-size:14px;
+    font-family:inherit;
+  }
+
+  button{
+    display:block;
+    margin:0 auto 14px;
+    padding:13px 26px;
+    border-radius:24px;
+    border:none;
+    background:#f8f4ee;
+    color:#9b5fc9;
+    font-weight:700;
+    font-size:14.5px;
+    cursor:pointer;
+    box-shadow:0 6px 14px rgba(0,0,0,.18);
+  }
+  button.morado{ background:#a569d4; color:#fff; }
+  button.oscuro{ background:#4a3169; color:#d9c6ea; }
+
+  .auth-inner{ max-width:320px; margin:0 auto; }
+  .auth-inner h1{ margin:0 0 20px; }
+  .subtitulo{ color:#d9c6ea; font-weight:600; margin:0 0 20px; }
+
+  a.link{
+    color:#fff;
+    display:block;
+    margin:18px 0;
+    cursor:pointer;
+    text-decoration:underline;
+    font-size:13px;
+    font-weight:600;
+
+  }
+
+  label.check{ font-size:12px; display:block; margin-bottom:16px; }
+  label.check input{ display:inline; width:auto; }
+
+  /* barra de navegación superior */
+  nav{
+    background:linear-gradient(90deg, #e061c0, #a15fdc 32%, #4fb0c4 62%, #443aa0);
+    padding:14px 20px;
+    text-align:left;
+    position:relative;
+  }
+  #usuario{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    margin:0;
+    padding:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.25);
+    color:#fff;
+    box-shadow:none;
+  }
+  #usuario svg{ width:22px; height:22px; }
+  #dropdown{
+    display:none;
+    position:absolute;
+    left:20px; top:56px;
+    background:#241a33;
+    border-radius:12px;
+    padding:8px;
+    z-index:10;
+    text-align:left;
+    box-shadow:0 10px 24px rgba(0,0,0,.35);
+  }
+  #dropdown.activa{ display:block; }
+  #dropdown a{
+    display:block;
+    padding:10px 16px;
+    color:#e6d9f2;
+    font-size:13.5px;
+    font-weight:600;
+    text-decoration:none;
+    border-radius:8px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  #dropdown a:hover{ background:rgba(255,255,255,.08); }
+
+  /* imagen debajo del título del menú */
+  .menu-img{
+    width:120px; height:120px;
+    margin:0 auto 22px;
+    border-radius:16px;
+    background:linear-gradient(150deg,#4b3a86,#7b4fa8 40%,#9c62c9);
+    display:flex; align-items:center; justify-content:center;
+    font-size:46px;
+    box-shadow:0 10px 24px rgba(0,0,0,.3);
+  }
+
+  /* pantalla de menú */
+  #menu{ max-width:340px; margin:30px auto 0; }
+  .titulo-pill{
+    display:inline-block;
+    background:rgba(230,220,240,.28);
+    font-weight:700; font-size:17px;
+    padding:12px 28px; border-radius:26px;
+    margin-bottom:22px;
+  }
+  #menu button{
+    width:100%;
+    text-align:left;
+    box-sizing:border-box;
+  }
+
+  /* calculadoras */
+  .calculadora{ max-width:340px; margin:0 auto; text-align:left; }
+  .calculadora h2{ text-align:center; }
+  .calculadora label{ font-size:13px; font-weight:700; display:block; margin-bottom:6px; }
+  .calculadora button{ display:block; margin:14px auto; padding:12px 40px; }
+
+  .resultado{
+    background:#faf5ef;
+    color:#241f18;
+    padding:12px 16px;
+    border-radius:14px;
+    margin:8px 0;
+    font-weight:700;
+    font-size:14px;
+  }
+  .resultado span{ font-weight:400; color:#5f584c; display:block; font-size:11px; }
+
+  .oculto{ display:none; }
